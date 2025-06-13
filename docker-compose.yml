@@ -1,0 +1,14 @@
+version: '3'
+services:
+  reserva:
+    build: .
+    environment:
+      - DISPLAY=${DISPLAY}
+    env_file: .env
+    volumes:
+      - .:/home/rolando/app
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ${HOME}/chrome-bot:/home/rolando/.config/google-chrome-bot
+    network_mode: host
+    stdin_open: true
+    tty: true
