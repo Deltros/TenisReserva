@@ -116,11 +116,17 @@ URL_AGENDAMIENTO = os.getenv("URL_AGENDAMIENTO")
 
 ES_LOCAL = not URL_AGENDAMIENTO.startswith("https://reservadehoras.lascondes.cl")
 
+user_data_dir = os.getenv("CHROME_USER_DATA_DIR", "/tmp/chrome-profile")
+os.makedirs(user_data_dir, exist_ok=True)
+
 options = uc.ChromeOptions()
 options.add_argument("--start-maximized")
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
+options.add_argument("--headless=new")
 # options.add_argument("--profile-directory=Profile 6")
 
-driver = uc.Chrome(options=options, user_data_dir="/home/rolando/.config/google-chrome-bot")
+driver = uc.Chrome(options=options, user_data_dir=user_data_dir)
 
 try:
     encontrado = False
